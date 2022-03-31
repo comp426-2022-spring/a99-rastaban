@@ -1,0 +1,23 @@
+{
+  "name": "final-project",
+  "version": "1.0.0",
+  "description": "You don't need to accept this assignment since you are already assigned to teams. So, there is not assignment invite link for a99.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/comp426-2022-spring/a99-rastaban.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/comp426-2022-spring/a99-rastaban/issues"
+  },
+  "homepage": "https://github.com/comp426-2022-spring/a99-rastaban#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
