@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+    <!-- Tab Title, CSS Formatting -->
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content = "width=device-width, initial-scale=1.0" />
@@ -10,30 +11,35 @@
     <body class="align">
 
         <div class="grid">
-      
-          <form action="https://httpbin.org/post" method="POST" class="form login">
-      
+            
+            <!-- Rerouts to next page if fields are complete -->
+          <form action="https://yt3.ggpht.com/ytc/AKedOLQA2FaWpJKjjpJkzfRKDlPXmgJN9QgVVHgY2kCgEA=s900-c-k-c0x00ffffff-no-rj" method="POST" class="form login">
+            
+            <!-- Username Input Field -->
             <div class="form__field">
               <label for="login__username"><svg class="icon">
                   <use xlink:href="#icon-user"></use>
                 </svg><span class="hidden">Username</span></label>
               <input autocomplete="username" id="login__username" type="text" name="username" class="form__input" placeholder="Username" required>
             </div>
-      
+            
+            <!-- Password Input Field -->
             <div class="form__field">
               <label for="login__password"><svg class="icon">
                   <use xlink:href="#icon-lock"></use>
                 </svg><span class="hidden">Password</span></label>
               <input id="login__password" type="password" name="password" class="form__input" placeholder="Password" required>
             </div>
-      
+            
+            <!-- Sign In Button -->
             <div class="form__field">
               <input type="submit" value="Sign In">
             </div>
       
           </form>
-      
-          <p class="text--center">Not a member? <a href="#">Sign up now</a> <svg class="icon">
+          
+          <!-- Sign Up Option -->
+          <p class="text--center">Don't have an account? <a href="#">Sign up now</a> <svg class="icon">
               <use xlink:href="#icon-arrow-right"></use>
             </svg></p>
       
