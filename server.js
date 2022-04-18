@@ -5,6 +5,12 @@ const html = require('html')
 const morgan = require('morgan')
 const minimist = require('minimist')
 
+// Require database SCRIPT file
+const db = require("./database.js");
+// Make Express use its own built-in body parser for both urlencoded and JSON body data.
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 var HTTP_PORT = 3000
 
 // Start an app server
