@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content = "width=device-width, initial-scale=1.0" />
-        <title>426 Login Form</title>
+        <title>426 Sign-Up Form</title>
         <link rel="stylesheet" type="text/css" href="style.css" media="screen"/>
     </head>
     
@@ -13,7 +13,7 @@
         <div class="grid">
             
             <!-- Rerouts to next page if fields are complete -->
-          <form action="https://yt3.ggpht.com/ytc/AKedOLQA2FaWpJKjjpJkzfRKDlPXmgJN9QgVVHgY2kCgEA=s900-c-k-c0x00ffffff-no-rj" method="POST" class="form login">
+          <form action="https://www.google.com/url?sa=i&url=https%3A%2F%2Fcodeconvey.com%2Fregistration-successful-message-html%2F&psig=AOvVaw319ozn-zVoI6wlaGVXaDme&ust=1649886370964000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCJjkseq_j_cCFQAAAAAdAAAAABAD" method="POST" class="form login">
             
             <!-- Username Input Field -->
             <div class="form__field">
@@ -30,18 +30,21 @@
                 </svg><span class="hidden">Password</span></label>
               <input id="login__password" type="password" name="password" class="form__input" placeholder="Password" required>
             </div>
+
+            <!-- Password Confirmation Field (must match previous field) -->
+            <div class="form__field">
+                <label for="login__password"><svg class="icon">
+                    <use xlink:href="#icon-lock"></use>
+                  </svg><span class="hidden">Password</span></label>
+                <input id="login__password" type="password" name="password" class="form__input" placeholder="Confirm Password" required>
+              </div>
             
             <!-- Sign In Button -->
             <div class="form__field">
-              <input type="submit" value="Sign In">
+              <input type="submit" value="Sign Up">
             </div>
       
           </form>
-          
-          <!-- Sign Up Option -->
-          <p class="text--center">Don't have an account? <a href="#">Sign up now</a> <svg class="icon">
-              <use xlink:href="#icon-arrow-right"></use>
-            </svg></p>
       
         </div>
       

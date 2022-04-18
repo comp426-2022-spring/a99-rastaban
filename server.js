@@ -11,6 +11,12 @@ const db = require("./database.js");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+//middleware for css to display
+app.use(express.static('public'));
+//app.use('/css', express.static(__dirname + 'public'));
+//app.use('/img', express.static(__dirname + 'public'));
+
+
 var HTTP_PORT = 3000
 
 // Start an app server
@@ -24,27 +30,59 @@ const server = app.listen(HTTP_PORT, () => {
 // Setting Endpoints
 
 //Main app screen
-app.get('/app/main/', (req, res) => {
-    res.sendFile(__dirname + "/index.html");    
-    res.status(200).type('text/json');
+app.get('/main/', (req, res) => {
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    fs.readFile('./index.html', null, function(err, data){
+        if(err){
+            res.writeHead(404);
+            res.write('File not found.');
+        }else{
+            res.write(data);
+        }
+        res.end();
+    })
 });
 
 //Sign-in screen
-app.get('/app/sign-in/', (req, res) => {
-    res.sendFile(__dirname + "/signin.html");
-    res.status(200).type('text/json');
+app.get('/sign-in/', (req, res) => {
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    fs.readFile('./signin.html', null, function(err, data){
+        if(err){
+            res.writeHead(404);
+            res.write('File not found.');
+        }else{
+            res.write(data);
+        }
+        res.end();
+    })
 });
 
 //Sign-up screen
-app.get('/app/sign-up/', (req, res) => {
-    res.status(200).type('text/json');
-    res.send("Sign-up")
+app.get('/sign-up/', (req, res) => {
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    fs.readFile('./signup.html', null, function(err, data){
+        if(err){
+            res.writeHead(404);
+            res.write('File not found.');
+        }else{
+            res.write(data);
+        }
+        res.end();
+    })
 });
 
 //Test (for development purposes)
 app.get('/test/', (req, res) => {
-    res.sendFile(__dirname + "/test.html");
-    res.status(200).type('text/json');
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    fs.readFile('./test.html', null, function(err, data){
+        if(err){
+            res.writeHead(404);
+            res.write('File not found.');
+        }else{
+            res.write(data);
+        }
+        res.end();
+    })
 });
 
 // Default response for any other request
