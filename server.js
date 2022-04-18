@@ -46,3 +46,28 @@ app.use(function(req, res){
     res.status(404).type("text/plain")
     res.send('404 NOT FOUND')    
 });
+
+// CREATE a new user (HTTP method POST) at endpoint /app/new/
+// Used for signing up a new user
+app.post("/app/new/user", (req, res, next) => {
+    let data = {
+        user: req.body.username,
+        pass: req.body.password
+    }
+    const stmt = db.prepare('INSERT INTO userinfo (username, password) VALUES (?, ?)')
+    const info = stmt.run(data.user, data.pass)
+    res.status(200).json(info)
+});
+
+// READ a single user (HTTP method GET) at endpoint /app/user/:id
+// Used for loggin in an existing user
+// Return the users in the database with the username inputed
+// Can check if the password is correct to see if the information is for an existing user
+app.get("/app/user/:username", (req, res) => {
+    try {
+        const stmt = db.prepare('SELECT * FROM userinfo WHERE username = ?').get(req.params.username);
+        res.status(200).json(stmt)
+    } catch (e) {
+        console.error(e)
+    }
+});
