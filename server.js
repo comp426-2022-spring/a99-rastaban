@@ -54,7 +54,7 @@ app.post("/app/new/user", (req, res, next) => {
         user: req.body.username,
         pass: req.body.password
     }
-    const stmt = db.prepare('INSERT INTO userinfo (username, password) VALUES (?, ?)')
+    const stmt = db.prepare('INSERT INTO userInformation (username, password) VALUES (?, ?)')
     const info = stmt.run(data.user, data.pass)
     res.status(200).json(info)
 });
@@ -65,7 +65,7 @@ app.post("/app/new/user", (req, res, next) => {
 // Can check if the password is correct to see if the information is for an existing user
 app.get("/app/user/:username", (req, res) => {
     try {
-        const stmt = db.prepare('SELECT * FROM userinfo WHERE username = ?').get(req.params.username);
+        const stmt = db.prepare('SELECT * FROM userInformation WHERE username = ?').get(req.params.username);
         res.status(200).json(stmt)
     } catch (e) {
         console.error(e)
