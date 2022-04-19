@@ -72,17 +72,9 @@ app.get('/sign-up/', (req, res) => {
 });
 
 //Test (for development purposes)
-app.get('/test/', (req, res) => {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    fs.readFile('./test.html', null, function(err, data){
-        if(err){
-            res.writeHead(404);
-            res.write('File not found.');
-        }else{
-            res.write(data);
-        }
-        res.end();
-    })
+app.post('/test/', (req, res) => {
+    res.status(200).type("text/json")
+    res.send([{Username: req.body.username},{Password: req.body.password}])  
 });
 
 // Default response for any other request
