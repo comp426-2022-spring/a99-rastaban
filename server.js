@@ -72,27 +72,24 @@ app.get('/sign-up/', (req, res) => {
 });
 
 //Test (for development purposes)
-app.post('/test/', (req, res) => {
+app.post('/test', (req, res) => {
     res.status(200).type("text/json")
-    res.send([{Username: req.body.username},{Password: req.body.password}])  
+    res.send({Username: req.body.username, Password: req.body.password})
+    console.log({Username: req.body.username, Password: req.body.password})
+    console.log("brUh")
 });
 
-// Default response for any other request
-app.use(function(req, res){
-    res.status(404).type("text/plain")
-    res.send('404 NOT FOUND')    
-});
 
 // CREATE a new user (HTTP method POST) at endpoint /app/new/
 // Used for signing up a new user
-app.post("/app/new/user", (req, res, next) => {
+app.post("/app/new/user", (req, res) => {
     let data = {
         user: req.body.username,
-        pass: req.body.password
+        pass: req.body.password[0]
     }
     const stmt = db.prepare('INSERT INTO userInformation (username, password) VALUES (?, ?)')
     const info = stmt.run(data.user, data.pass)
-    res.status(200).json(info)
+    res.status(200).json(data)
 });
 
 // READ a single user (HTTP method GET) at endpoint /app/user/:id
@@ -106,4 +103,10 @@ app.get("/app/user/:username", (req, res) => {
     } catch (e) {
         console.error(e)
     }
+});
+
+// Default response for any other request
+app.use(function(req, res){
+    res.status(404).type("text/plain")
+    res.send('404 NOT FOUND')    
 });
