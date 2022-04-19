@@ -20,6 +20,18 @@
     margin-inline: auto;
     max-inline-size: 20rem;
   }
+
+  .titleAlign {
+    display: titleGrid;
+    place-items: center;
+    text-align: center;
+  }
+
+  .titleGrid {
+    inline-size: 90%;
+    margin-inline: auto;
+    max-inline-size: 80rem;
+  }
   
   /* helpers/hidden.css */
   
@@ -86,6 +98,7 @@
     min-block-size: 100vh;
   }
   
+  
   /* modules/anchor.css */
   
   :root {
@@ -124,6 +137,13 @@
     cursor: pointer;
   }
   
+  .title {
+    text-align: center;
+    font-family: var(--bodyFontFamily), var(--bodyFontFamilyFallback);
+    font-size: 2.875rem;
+    color: rgb(190, 157, 199);
+  }
+
   .form {
     display: grid;
     gap: var(--formGap);
