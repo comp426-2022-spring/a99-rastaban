@@ -32,7 +32,7 @@ const server = app.listen(HTTP_PORT, () => {
 //Main app screen
 app.get('/main/', (req, res) => {
     res.writeHead(200, {'Content-Type': 'text/html'});
-    fs.readFile('./index.html', null, function(err, data){
+    fs.readFile('./dashboard.html', null, function(err, data){
         if(err){
             res.writeHead(404);
             res.write('File not found.');
