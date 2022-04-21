@@ -99,7 +99,21 @@ app.post('/main/', (req, res) => {
     }    
 
     //ADD ACCESSLOG
-
+    let logdata = {
+        remoteaddr: req.ip,
+        remoteuser: req.user,
+        time: Date.now(),
+        method: req.method,
+        url: req.url,
+        protocol: req.protocol,
+        httpversion: req.httpVersion,
+        status: res.statusCode,
+        referer: req.headers['referer'],
+        useragent: req.headers['user-agent']
+      }
+  
+      const stmt = db.prepare('INSERT INTO accesslog (remoteaddr, remoteuser, time, method, url, protocol, httpversion, status, referer, useragent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
+      const info = stmt.run(logdata.remoteaddr, logdata.remoteuser, logdata.time, logdata.method, logdata.url, logdata.protocol, logdata.httpversion, logdata.status, logdata.referer, logdata.useragent)  
 });
 
 //Sign-in screen
@@ -163,6 +177,12 @@ app.get("/app/user/:username", (req, res) => {
         console.error(e)
     }
 });
+
+// Endpoints for getting information from accessLog.db
+app.get('/app/log/access', (req, res) => {
+    const stmt = db.prepare('SELECT * FROM accesslog').all()
+    res.status(200).json(stmt)
+})
 
 // Default response for any other request
 app.use(function(req, res){
