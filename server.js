@@ -7,6 +7,7 @@ const minimist = require('minimist')
 
 // Require database SCRIPT file
 const db = require("./database.js");
+const accessDb = require("./accessLogDatabase.js")
 // Make Express use its own built-in body parser for both urlencoded and JSON body data.
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -111,9 +112,10 @@ app.post('/main/', (req, res) => {
         referer: req.headers['referer'],
         useragent: req.headers['user-agent']
       }
+      //console.log(logdata)
   
-      const stmt = db.prepare('INSERT INTO accesslog (remoteaddr, remoteuser, time, method, url, protocol, httpversion, status, referer, useragent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
-      const info = stmt.run(logdata.remoteaddr, logdata.remoteuser, logdata.time, logdata.method, logdata.url, logdata.protocol, logdata.httpversion, logdata.status, logdata.referer, logdata.useragent)  
+    const stmt = accessDb.prepare('INSERT INTO accesslog (remoteaddr, remoteuser, time, method, url, protocol, httpversion, status, referer, useragent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
+    const info = stmt.run(logdata.remoteaddr, logdata.remoteuser, logdata.time, logdata.method, logdata.url, logdata.protocol, logdata.httpversion, logdata.status, logdata.referer, logdata.useragent)  
 });
 
 //Sign-in screen
