@@ -30,17 +30,64 @@ const server = app.listen(HTTP_PORT, () => {
 // Setting Endpoints
 
 //Main app screen
-app.get('/main/', (req, res) => {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    fs.readFile('./dashboard.html', null, function(err, data){
-        if(err){
-            res.writeHead(404);
-            res.write('File not found.');
-        }else{
-            res.write(data);
+app.post('/main/', (req, res) => {
+
+    //SIGN UP
+    if(req.query.url == 'signup'){
+        let data = {
+            user: req.body.username,
+            pass: req.body.password[0]
         }
-        res.end();
-    })
+        const stmt = db.prepare('INSERT INTO userInformation (username, password) VALUES (?, ?)')
+        const info = stmt.run(data.user, data.pass)
+        console.log(info)
+
+        fs.readFile('./signin.html', null, function(err, data){
+            if(err){
+                res.writeHead(404);
+                res.write('File not found.');
+            }else{
+                res.write(data);
+            }
+            res.end();
+        })
+    }
+
+    //SIGN IN
+    if (req.query.url == 'signin'){
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        try {
+            const stmt = db.prepare('SELECT * FROM userInformation WHERE username = ?').get(req.body.username);
+            //console.log(stmt["password"])
+            if(stmt["password"] != req.body.password){
+                console.log("Passwords don't match, try again")
+                fs.readFile('./signin.html', null, function(err, data){
+                    if(err){
+                        res.writeHead(404);
+                        res.write('File not found.');
+                    }else{
+                        res.write(data);
+                    }
+                    res.end();
+                })
+            }else{
+                fs.readFile('./dashboard.html', null, function(err, data){
+                    if(err){
+                        res.writeHead(404);
+                        res.write('File not found.');
+                    }else{
+                        res.write(data);
+                    }
+                    res.end();
+                })
+            }
+        } catch (e) {
+            console.error(e)
+        }
+    }    
+
+    //ADD ACCESSLOG
+
 });
 
 //Sign-in screen
