@@ -34,23 +34,35 @@ app.post('/main/', (req, res) => {
 
     //SIGN UP
     if(req.query.url == 'signup'){
-        let data = {
-            user: req.body.username,
-            pass: req.body.password[0]
-        }
-        const stmt = db.prepare('INSERT INTO userInformation (username, password) VALUES (?, ?)')
-        const info = stmt.run(data.user, data.pass)
-        console.log(info)
-
-        fs.readFile('./signin.html', null, function(err, data){
-            if(err){
-                res.writeHead(404);
-                res.write('File not found.');
-            }else{
-                res.write(data);
+        if(req.body.password[0] == req.body.password[1]){
+            let data = {
+                user: req.body.username,
+                pass: req.body.password[0]
             }
-            res.end();
-        })
+            const stmt = db.prepare('INSERT INTO userInformation (username, password) VALUES (?, ?)')
+            const info = stmt.run(data.user, data.pass)
+            console.log(info)
+
+            fs.readFile('./signin.html', null, function(err, data){
+                if(err){
+                    res.writeHead(404);
+                    res.write('File not found.');
+                }else{
+                    res.write(data);
+                }
+                res.end();
+            })
+        }else{
+            fs.readFile('./dontMatch.html', null, function(err, data){
+                if(err){
+                    res.writeHead(404);
+                    res.write('File not found.');
+                }else{
+                    res.write(data);
+                }
+                res.end();
+            })
+        }
     }
 
     //SIGN IN
