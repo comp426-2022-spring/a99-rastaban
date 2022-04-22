@@ -72,7 +72,18 @@ app.post('/main/', (req, res) => {
         try {
             const stmt = db.prepare('SELECT * FROM userInformation WHERE username = ?').get(req.body.username);
             //console.log(stmt["password"])
-            if(stmt["password"] != req.body.password){
+            if(stmt == null){
+                console.log("Passwords don't match, try again")
+                fs.readFile('./signin.html', null, function(err, data){
+                    if(err){
+                        res.writeHead(404);
+                        res.write('File not found.');
+                    }else{
+                        res.write(data);
+                    }
+                    res.end();
+                })
+            }else if (stmt["password"] != req.body.password){
                 console.log("Passwords don't match, try again")
                 fs.readFile('./signin.html', null, function(err, data){
                     if(err){
