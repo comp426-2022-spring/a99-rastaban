@@ -193,7 +193,7 @@ app.get("/app/user/:username", (req, res) => {
 
 // Endpoints for getting information from accessLog.db
 app.get('/app/log/access', (req, res) => {
-    const stmt = db.prepare('SELECT * FROM accesslog').all()
+    const stmt = accessDb.prepare('SELECT * FROM accesslog').all()
     res.status(200).json(stmt)
 })
 
