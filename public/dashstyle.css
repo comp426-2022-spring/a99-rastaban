@@ -7,32 +7,32 @@ body{
     justify-content: center;
 }
 /* Backdrop */
-body::after{
-    position: absolute;
-    content: "";
-    height: 50%;
-    width: 100%;
-    background: #0ac7f7;
-    top: 0;
-}
-body::before{
-    position: absolute;
-    content: "";
-    height: 50%;
-    width: 100%;
-    background: #fff;
-    bottom: 0;
-}
+body {background-color: rgb(46, 43, 54);}
+
 
 /* Main Dashboard Box */
 .container{
     z-index: 1;
     width: 70%;
-    margin: 0 auto;
+    margin: 10 auto;
     border-radius: 24px;
     background: #f6f5f0;
     padding: 2%;
     box-shadow: 0px 10px 6px -8px rgba(0, 0, 0, 0.75);
+}
+.container2{
+    z-index: 1;
+    width: 30%;
+    height: 80%;
+    margin: 10 auto;
+    border-radius: 24px;
+    background: #f6f5f0;
+    padding: 2%;
+    box-shadow: 0px 10px 6px -8px rgba(0, 0, 0, 0.75);
+}
+.twitter-timeline{
+    max-width:100%;
+    max-height:80%;
 }
 .board{
     column-count: 3;
