@@ -7,7 +7,7 @@ body{
     justify-content: center;
 }
 /* Backdrop */
-body {background-color: rgb(46, 43, 54);}
+body {background-color: #2c3338;}
 
 
 /* Main Dashboard Box */
@@ -26,13 +26,13 @@ body {background-color: rgb(46, 43, 54);}
     height: 80%;
     margin: 10 auto;
     border-radius: 24px;
-    background: #f6f5f0;
+    background: rgb(103, 78, 110);
     padding: 2%;
     box-shadow: 0px 10px 6px -8px rgba(0, 0, 0, 0.75);
 }
 .twitter-timeline{
     max-width:100%;
-    max-height:80%;
+    max-height:1000%;
 }
 .board{
     column-count: 3;
