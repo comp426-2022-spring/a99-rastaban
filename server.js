@@ -3,8 +3,9 @@ const app = express()
 const fs = require('fs')
 const html = require('html')
 const morgan = require('morgan')
-const minimist = require('minimist')
+var argv = require('minimist')(process.argv.slice(2));
 
+console.log(argv)
 // Require database SCRIPT file
 const db = require("./database.js");
 const accessDb = require("./accessLogDatabase.js")
@@ -17,7 +18,7 @@ app.use(express.static('public'));
 //app.use('/css', express.static(__dirname + 'public'));
 //app.use('/img', express.static(__dirname + 'public'));
 
-
+var DEV = (argv['mode'] == 'dev');
 var HTTP_PORT = 3000
 
 // Start an app server
@@ -157,45 +158,42 @@ app.get('/sign-up/', (req, res) => {
     })
 });
 
-//Test (for development purposes)
-app.post('/test', (req, res) => {
-    res.status(200).type("text/json")
-    res.send({Username: req.body.username, Password: req.body.password})
-    console.log({Username: req.body.username, Password: req.body.password})
-    console.log("brUh")
-});
-
-
 // CREATE a new user (HTTP method POST) at endpoint /app/new/
 // Used for signing up a new user
-app.post("/app/new/user", (req, res) => {
-    let data = {
-        user: req.body.username,
-        pass: req.body.password[0]
-    }
-    const stmt = db.prepare('INSERT INTO userInformation (username, password) VALUES (?, ?)')
-    const info = stmt.run(data.user, data.pass)
-    res.status(200).json(data)
-});
+
+// app.post("/app/new/user", (req, res) => {
+//     let data = {
+//         user: req.body.username,
+//         pass: req.body.password[0]
+//     }
+//     const stmt = db.prepare('INSERT INTO userInformation (username, password) VALUES (?, ?)')
+//     const info = stmt.run(data.user, data.pass)
+//     res.status(200).json(data)
+// });
 
 // READ a single user (HTTP method GET) at endpoint /app/user/:id
 // Used for loggin in an existing user
 // Return the users in the database with the username inputed
 // Can check if the password is correct to see if the information is for an existing user
-app.get("/app/user/:username", (req, res) => {
-    try {
-        const stmt = db.prepare('SELECT * FROM userInformation WHERE username = ?').get(req.params.username);
-        res.status(200).json(stmt)
-    } catch (e) {
-        console.error(e)
-    }
-});
 
-// Endpoints for getting information from accessLog.db
-app.get('/app/log/access', (req, res) => {
-    const stmt = accessDb.prepare('SELECT * FROM accesslog').all()
-    res.status(200).json(stmt)
-})
+// Allows for app to be run in developer mode which gives access searching the
+// database directly for users
+if(DEV){
+    app.get("/app/user/:username", (req, res) => {
+        try {
+            const stmt = db.prepare('SELECT * FROM userInformation WHERE username = ?').get(req.params.username);
+            res.status(200).json(stmt)
+        } catch (e) {
+            console.error(e)
+        }
+    });
+
+    // Endpoints for getting information from accessLog.db
+    app.get('/app/log/access', (req, res) => {
+        const stmt = accessDb.prepare('SELECT * FROM accesslog').all()
+        res.status(200).json(stmt)
+    })
+}
 
 // Default response for any other request
 app.use(function(req, res){
