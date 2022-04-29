@@ -16,7 +16,7 @@ body {background-color: #2c3338;}
     width: 70%;
     margin: 10 auto;
     border-radius: 24px;
-    background: #f6f5f0;
+    background: rgb(118, 87, 142);
     padding: 2%;
     box-shadow: 0px 10px 6px -8px rgba(0, 0, 0, 0.75);
 }
@@ -26,7 +26,7 @@ body {background-color: #2c3338;}
     height: 80%;
     margin: 10 auto;
     border-radius: 24px;
-    background: rgb(103, 78, 110);
+    background: rgb(127, 76, 118);
     padding: 2%;
     box-shadow: 0px 10px 6px -8px rgba(0, 0, 0, 0.75);
 }

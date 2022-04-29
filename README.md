@@ -1,4 +1,4 @@
-# a99 Final Project
+# a99 Final Project - COVID Dashboard Team Rastaban
 
 ## UPDATE
 
@@ -6,11 +6,11 @@ You don't need to accept this assignment since you are already assigned to teams
 
 ## Summary 
 
-COMP426 final project template repository.
-All your code and documentation goes here.
-Change this text to be a brief description of your final project.
-Put the name of your project in the header above.
-You will change everything below to be the main technical documentation, as outlined below.
+Our final project is a functional account-tracking COVID dashboard. Users will be able to create an account with a username and password, which will be entered into our login database. Every interaction such as this will also be logged into our access log database, and both of these databases are accessible through the developer mode when launching the app. Our dashboard includes a live CDC Twitter feed and multiple live statistics tracking COVID cases in the United States.
+
+Links to documentation:
+    `/docs/API_Endpoints.md` - List and description of all API endpoints we've created
+    `/docs/planning.md` - Original project planning and roles assigned to team members
 
 ## First steps
 
