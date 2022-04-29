@@ -130,6 +130,19 @@ app.post('/main/', (req, res) => {
     const info = stmt.run(logdata.remoteaddr, logdata.remoteuser, logdata.time, logdata.method, logdata.url, logdata.protocol, logdata.httpversion, logdata.status, logdata.referer, logdata.useragent)  
 });
 
+//Landing Page
+app.get('/app', (req,res) => {
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    fs.readFile('./landingPage.html', null, function(err, data){
+        if(err){
+            res.writeHead(404);
+            res.write('File not found.');
+        }else{
+            res.write(data);
+        }
+        res.end();
+    })
+});
 //Sign-in screen
 app.get('/sign-in/', (req, res) => {
     res.writeHead(200, {'Content-Type': 'text/html'});
